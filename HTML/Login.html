@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/CSS/Login.css">
+    <link rel="shortcut icon" href="/Photos/shortcut icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+    <video autoplay muted loop playsinline class="bg-video">
+        <source src="/Photos/Pub.mp4" type="video/mp4">
+    </video>
+    <div class="bg-overlay"></div>
+
+    <div class="container" id="container">
+        <div class="form-container sign-up">
+            <form action="/HTML/U-Ad.html" method="POST">
+                <h1>Créer un Compte</h1>
+                <div class="social-icons">
+                    <a href="https://www.google.com/" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+                    <a href="https://www.facebook.com/" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://github.com/?locale=fr-fr" class="icon"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://www.linkedin.com/" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+                <span>ou utilisez votre adresse e-mail pour vous inscrire</span>
+                <input type="text" placeholder="Nom" />
+                <input type="email" placeholder="Email" />
+                <div class="password-container">
+                    <input type="password" placeholder="Password" />
+                    <i class="fa-solid fa-eye toggle-password"></i>
+                </div>
+                <button type="submit" class="hidden-btn">Sign Up</button>
+            </form>
+        </div>
+        <div class="form-container sign-in">
+            <form action="/HTML/U-Ad.html" method="POST">
+                <h1>Se Connecter</h1>
+                <div class="social-icons">
+                    <a href="https://www.google.com/" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+                    <a href="https://www.facebook.com/" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://github.com/?locale=fr-fr" class="icon"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://www.linkedin.com/" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+                <span>ou utiliser votre mot de passe pour vous connecter</span>
+                <input type="email" placeholder="Email" />
+                <div class="password-container">
+                    <input type="password" placeholder="Password" />
+                    <i class="fa-solid fa-eye toggle-password"></i>
+                </div>
+                <a href="mot_de_passe_oubliee.html" class="forgot">Mot de passe oublié ?</a>
+                <button type="submit" class="hidden-btn">Sign In</button>
+            </form>
+        </div>
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-left">
+                    <h1>Content de te revoir!</h1>
+                    <p>Veuillez entrer vos informations personnelles pour continuer plus loins</p>
+                    <button class="hidden" id="login">Sign In</button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <h1>Bonjour les amis !</h1>
+                    <p>Entrer vos informations pour vous enregistrer</p>
+                    <button class="hidden" id="register">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/JS/Login.js"></script>
+</body> 
+</html>
