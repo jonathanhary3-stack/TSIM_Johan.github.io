@@ -227,6 +227,8 @@
       }
 
 /* css free */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
 *{
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
@@ -234,6 +236,48 @@
     margin: 0;
 }
 
+/* --- DESIGN GÉNÉRAL DU CONTENEUR DE VIDÉOS TRÈS CENTRÉ --- */
+.content-container {
+    width: 100%;
+    max-width: 460px; /* Taille parfaite type smartphone / Réels sur PC */
+    margin: 0 auto;   /* Centre parfaitement tout le bloc horizontalement */
+    padding: 40px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;       
+}
+
+.content-container h1 {
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.fake-video-card {
+    width: 100%;
+    height: 78vh; /* Proportionnel à la hauteur de l'écran */
+    min-height: 500px;
+    background: linear-gradient(135deg, #1e1e2f, #2a2a40);
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 20px;
+    font-weight: 400;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    transition: transform 0.3s ease;
+}
+
+.fake-video-card:hover {
+    transform: scale(1.01);
+}
+
+/* --- NAV BAR STRUCTURE --- */
 .nav-bar{
     position: fixed;
     top: 0;
@@ -266,7 +310,6 @@
     box-shadow:
         0 8px 20px rgba(0, 0, 0, 0.15),
         inset 0 1px 0 rgba(255, 255, 255, 0.5);
-    margin-bottom: 20px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     margin-bottom: 30px;
     border-bottom: none;
@@ -297,7 +340,6 @@ nav{
         0 10px 20px -10px rgba(0, 0, 0, 0.2),
         inset 0 1px 0 rgba(255, 255, 255, 0.5);
     width: 100%;
-    left: 20px;
 }
 
 nav::before{
@@ -339,7 +381,6 @@ nav ul li{
     padding: 13px 10px;
     font-size: 16px;
     font-weight: 500;
-    color: #777;
     cursor: pointer;
     transition: color 0.5s;
     position: relative;
@@ -347,6 +388,7 @@ nav ul li{
     color: rgba(50, 50, 50, 0.8);
 }
 
+/* --- 1. L'EFFET APPARITION DE L'EFFET GLASS AU HOVER (TON CODE ORIGINEL) --- */
 nav ul li::after{
     content: '';
     background: rgba(255, 255, 255, 0.2);
@@ -358,7 +400,7 @@ nav ul li::after{
     height: 100%;
     border-radius: 30px;
     transform: translate(-50%, -50%);
-    transition: top 0.5s, opacity 0.5s;
+    transition: top 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
     left: 50%;
     top: 100%;
     z-index: -1;
@@ -367,6 +409,7 @@ nav ul li::after{
         inset 0 1px 0 rgba(255, 255, 255, 0.4),
         0 4px 15px rgba(0, 0, 0, 0.1);
 }
+
 nav ul li:hover{
     color: #fff;
 }
@@ -376,6 +419,45 @@ nav ul li:hover::after{
     top: 50%;
 }
 
+/* --- 2. L'EFFET STATIQUE (QUAND LA SOURIS EST DEHORS) --- */
+/* On crée une bulle virtuelle sur l'élément qui possède la classe .active */
+nav ul li.active::before {
+    content: '';
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px) saturate(180%);
+    -webkit-backdrop-filter: blur(10px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -2;
+    opacity: 1; /* Visible par défaut */
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.4),
+        0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.3s ease; /* Transition douce pour s'effacer */
+}
+
+/* Règle magique : Si la nav-bar a la classe .is-hovered, on cache la bulle statique active */
+.nav-bar.is-hovered nav ul li.active::before {
+    opacity: 0;
+}
+
+/* Forcer l'icône de la page active à rester blanche quand la souris n'est pas là */
+nav ul li.active {
+    color: #fff;
+}
+
+/* Si la souris entre, l'icône active reprend sa couleur normale pour laisser le hover faire son travail */
+.nav-bar.is-hovered nav ul li.active:not(:hover) {
+    color: rgba(50, 50, 50, 0.8);
+}
+
+/* --- TOOLTIPS TEXTE AU SURVOL --- */
 nav ul li a{
     position: relative;
     display: flex;
@@ -435,6 +517,135 @@ nav ul li a::before{
 nav ul li a:hover::before{
     opacity: 1;
     transform: translateY(-50%) translateX(0);
+}
+
+/* --- FORMAT RESPONSIVE SMARTPHONE --- */
+/* --- FORMAT MOBILE / RESPONSIVE (DECOUPE ET GRILLE PARFAITE) --- */
+@media (max-width: 768px) {
+    body {
+        padding-left: 0; 
+        padding-bottom: 100px; 
+    }
+
+    .content-container {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0;
+        margin: 0 auto;
+        padding-bottom: 120px;
+    }
+
+    .nav-bar {
+        position: fixed;
+        top: auto;
+        bottom: 24px; 
+        left: 50%;
+        transform: translateX(-50%); 
+        width: 90%; 
+        max-width: 450px; 
+        height: 65px; 
+        display: flex;
+        flex-direction: row; 
+        justify-content: flex-start; 
+        align-items: center;
+        padding: 0;
+        z-index: 9999;
+        transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
+
+        background: rgba(255, 255, 255, 0.2); 
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        border: 1px solid rgba(255, 255, 255, 0.3); 
+        border-radius: 35px; 
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25); 
+    }
+
+    .nav-logo {
+        display: none; 
+    }
+
+    nav {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        overflow-x: auto; /* Active le défilement horizontal */
+        scroll-snap-type: x mandatory; /* Aligne proprement les icônes lors du glissement */
+        -webkit-overflow-scrolling: touch;
+        background: transparent; 
+        border-radius: 35px;
+        padding: 0 5px; /* Un petit espace interne équilibré */
+    }
+
+    nav::-webkit-scrollbar {
+        display: none;
+    }
+    nav {
+        scrollbar-width: none; 
+    }
+
+    nav::before, nav::after {
+        display: none;
+    }
+
+    nav ul {
+        display: flex;
+        flex-direction: row; 
+        justify-content: flex-start; 
+        align-items: center;
+        width: 100%; /* S'aligne sur la taille du parent */
+        height: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    nav ul li {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        /* LA RÈGLE MAGIQUE : Chaque li fait exactement 1/5ème (20%) de l'espace visible total */
+        flex: 0 0 20%; 
+        scroll-snap-align: start;
+    }
+
+    /* Nettoyage complet des hovers/tooltips desktop sur mobile */
+    .nav-bar.is-hovered nav ul li.active:not(:hover) {
+        color: #fff;
+    }
+    nav ul li.active::before {
+        display: none !important;
+    }
+    nav ul li::after {
+        display: none !important;
+    }
+    nav ul li a::after, nav ul li a::before {
+        display: none !important;
+    }
+
+    /* Rendu visuel propre du bouton actif sur mobile */
+    nav ul li.active a i {
+        color: #ffffff;
+        background: rgba(255, 255, 255, 0.25);
+        padding: 10px 14px;
+        border-radius: 18px;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    nav ul li a i {
+        color: #ffffff; 
+        font-size: 20px;
+    }
+
+    .nav-bar.nav-hidden {
+        transform: translate(-50%, 150%); 
+        opacity: 0;
+    }
 }
 
 .main{
